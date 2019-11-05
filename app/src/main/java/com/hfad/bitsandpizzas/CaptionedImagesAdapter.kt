@@ -1,6 +1,5 @@
 package com.hfad.bitsandpizzas
 
-import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -8,10 +7,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import java.text.FieldPosition
 
-class CaptionedImagesAdapter(var captions:List<String>,var imageIds:List<Int>):
+class CaptionedImagesAdapter(var captions:List<String>, var imageIds:List<Int>):
     RecyclerView.Adapter<CaptionedImagesAdapter.ViewHolder>() {
+
+//    private lateinit var listener: Listener
+//    interface Listener{
+//        fun onClick(position: Int)
+//    }
+//    fun setListener (listener: Listener){
+//        this.listener=listener
+//    }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CaptionedImagesAdapter.ViewHolder =
         ViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.card_captioned_image,p0,false) as CardView)
@@ -27,7 +33,8 @@ class CaptionedImagesAdapter(var captions:List<String>,var imageIds:List<Int>):
             val textView=view.findViewById<TextView>(R.id.info_text)
             val drawable =ContextCompat.getDrawable(view.context,imageIds[position])
             imageView.setImageDrawable(drawable)
-            textView.setText(captions[position])
+            imageView.contentDescription = captions[position]
+            textView.text = captions[position]
 
         }
     }
