@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 class PizzaDetailActivity: AppCompatActivity() {
-    var EXTRA_PIZZA_ID="pizzaId"
+    val EXTRA_PIZZA_ID="pizzaId"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

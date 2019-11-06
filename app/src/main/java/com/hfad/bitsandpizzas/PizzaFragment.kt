@@ -10,7 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class PizzaFragment: Fragment() {
+class PizzaFragment: Fragment(),CaptionedImagesAdapter.Listener {
+
+    override fun onClick(position: Int) {
+        val i =Intent(activity,PizzaDetailActivity::class.java)
+        i.putExtra("pizzaId",position)
+        startActivity(i)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val pizzaName = mutableListOf<String>()
         val pizzaImage = mutableListOf<Int>()
@@ -23,7 +30,7 @@ class PizzaFragment: Fragment() {
         val adapter=CaptionedImagesAdapter(pizzaName,pizzaImage)
         pizzaRecView.adapter=adapter
         pizzaRecView.layoutManager= GridLayoutManager(activity,2)
-
+        adapter.setListener(this)
         return pizzaRecView
     }
 }

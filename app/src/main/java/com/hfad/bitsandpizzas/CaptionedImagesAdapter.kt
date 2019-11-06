@@ -11,21 +11,24 @@ import android.widget.TextView
 class CaptionedImagesAdapter(var captions:List<String>, var imageIds:List<Int>):
     RecyclerView.Adapter<CaptionedImagesAdapter.ViewHolder>() {
 
-//    private lateinit var listener: Listener
-//    interface Listener{
-//        fun onClick(position: Int)
-//    }
-//    fun setListener (listener: Listener){
-//        this.listener=listener
-//    }
+    private lateinit var listener: Listener
+    interface Listener{
+        fun onClick(position: Int)
+    }
+    fun setListener (listener: Listener){
+        this.listener=listener
+    }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CaptionedImagesAdapter.ViewHolder =
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder =
         ViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.card_captioned_image,p0,false) as CardView)
 
     override fun getItemCount(): Int=captions.size
 
-    override fun onBindViewHolder(p0: CaptionedImagesAdapter.ViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.bind(p1)
+        p0.view.setOnClickListener {
+            listener.onClick(p1)
+        }
     }
     inner class ViewHolder(var view:CardView): RecyclerView.ViewHolder(view) {
         fun bind (position:Int){
@@ -38,6 +41,5 @@ class CaptionedImagesAdapter(var captions:List<String>, var imageIds:List<Int>):
 
         }
     }
-
 }
 
